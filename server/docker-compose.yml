@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: "./docker_compose/db/Dockerfile"
+    networks:
+      - suwee_django_server_network
+    restart: always
+    container_name: suwee_postgres
+    environment:
+      POSTGRES_USER: suwee
+      POSTGRES_PASSWORD: 1234
+
+  django:
+    build:
+      context: .
+      dockerfile: "./docker_compose/django/Dockerfile"
+    networks:
+      - suwee_django_server_network
+    restart: always
+    container_name: suwee_django
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    entrypoint: './docker_entrypoint.sh'
+
+# 아래 주석 3줄은 "docker-compose run" 으로 bash 실행하여 디버깅할 때 주석 풀어서 사용
+#    stdin_open: true # docker run -i
+#    tty: true        # docker run -t
+#    entrypoint: '/bin/bash'
+
+networks:
+  suwee_django_server_network:
+    external: false
