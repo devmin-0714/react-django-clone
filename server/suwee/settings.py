@@ -67,14 +67,13 @@ WSGI_APPLICATION = 'suwee.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'suwee_library_db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'suwee_db',
         'USER': 'suwee',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'HOST': 'suwee_postgres',
+        'PORT': '5432',
     }
 }
 
@@ -104,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'ASIA/SEOUL'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
